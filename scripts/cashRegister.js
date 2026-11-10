@@ -1,0 +1,1 @@
+// gestion de la caisse: si la commande est ok on ajoute les pièces à la caisse

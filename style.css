@@ -1,0 +1,68 @@
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.arbre {
+    position: absolute;
+    top: 30px;
+    height: 0;
+    z-index: 1;
+    width: 80vw;
+    height: 80vh;
+    background-image: url(assets/arbre.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.arbre.active {
+    background-image: url(assets/pommier.svg);
+    
+}
+
+.bg {
+    background-image: url(assets/bg.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.stand {
+    background-image: url(assets/stand.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.pers1 {
+    background-image: url(assets/pers1.svg);
+    position: absolute;
+    top: 350px;
+    height: 0;
+    z-index: 1;
+    width: 40vw;
+    height: 40vh;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 2s ease;
+}
+
+/* .pers1.active {
+ transform: translateX(300px);
+ 
+} */

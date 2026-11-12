@@ -62,6 +62,33 @@
     transition: transform 2s ease;
 }
 
+
+#order-display {
+    position:absolute;
+    bottom: 85%;
+    left: 50%;
+    transform: translateX(-50%);
+
+
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+
+    white-space: nowrap;
+    z-index: 20;
+
+    display: none;
+}
+
+
+#appel-client {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    padding: 12px 20px;
+    cursor: pointer;
+}
 /* .pers1.active {
  transform: translateX(300px);
  

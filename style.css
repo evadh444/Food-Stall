@@ -1,68 +1,154 @@
+:root {
+    /* Remplace par la taille de ta page Inkscape (Fichier > Propriétés du document) */
+    --largeur: 1920;
+    --hauteur: 1080;
+}
+
+body {
+    margin: 0;
+    height: 100dvh;
+    display: grid;
+    place-items: center;
+    background-color: #222;
+    overflow: hidden;
+}
+
 .container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    aspect-ratio: var(--largeur) / var(--hauteur);
+    width: min(100vw, 100dvh * var(--largeur) / var(--hauteur));
+    overflow: hidden;
+}
+
+.bg,
+.stand {
+    position: absolute;
+    inset: 0; 
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+}
+
+.bg    { background-image: url(assets/bg.svg);    z-index: 0; }
+.stand { background-image: url(assets/stand.svg); z-index: 90; }
+
+.arbre, .potager, .poulailler,
+.pers1, .pers2, .pers3,
+.cafe, .tarte, .soupe, .omelette, .cagnotte {
+    position: absolute;
+    left:   calc(var(--x) / var(--largeur) * 100%);
+    top:    calc(var(--y) / var(--hauteur) * 100%);
+    width:  calc(var(--l) / var(--largeur) * 100%);
+    height: calc(var(--h) / var(--hauteur) * 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.arbre, .potager, .poulailler {
+    z-index: 5;
 }
 
 .arbre {
-    position: absolute;
-    top: 30px;
-    height: 0;
-    z-index: 1;
-    width: 80vw;
-    height: 80vh;
-    background-image: url(assets/arbre.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
-    pointer-events: auto;
+    --x: -18; --y: 80; --l: 549.083; --h: 659.283;
+    background-image: url(assets/arbre-.svg);   
+}
+
+.arbre.surbrillance {
+    filter: drop-shadow(0 0 12px gold);
 }
 
 .arbre.active {
-    background-image: url(assets/pommier.svg);
-    
+    background-image: url(assets/arbre+.svg);
 }
 
-.bg {
-    background-image: url(assets/bg.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    pointer-events: none;
+.potager {
+    --x: 600; --y: 500; --l: 500.300; --h: 270;
+    background-image: url(assets/potager-.svg);
 }
 
-.stand {
-    background-image: url(assets/stand.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
+.potager.surbrillance {
+    filter: drop-shadow(0 0 12px gold);
+}
+
+.potager.active {
+    background-image: url(assets/potager+.svg);
+}
+
+.poulailler {
+    --x: 1356.898; --y: 381.836; --l: 511.076; --h: 442.541;
+    background-image: url(assets/poulailler-.svg);
+}
+
+.poulailler.surbrillance {
+    filter: drop-shadow(0 0 12px gold);
+}
+
+.poulailler.active {
+    background-image: url(assets/poulailler.svg);
+}
+
+.pers1, .pers2, .pers3 {
     z-index: 10;
     pointer-events: none;
-}
-
-.pers1 {
-    background-image: url(assets/pers1.svg);
-    position: absolute;
-    top: 350px;
-    height: 0;
-    z-index: 1;
-    width: 40vw;
-    height: 40vh;
-    cursor: pointer;
-    pointer-events: auto;
     transition: transform 2s ease;
 }
 
-/* .pers1.active {
- transform: translateX(300px);
- 
-} */
+.pers1 {
+    --x: -100; --y: 364.237; --l: 330; --h: 557.473;    
+    background-image: url(assets/pers1.svg);    
+}
+
+.pers2 {
+    --x: -400; --y: 390; --l: 350; --h: 540;
+    background-image: url(assets/pers2.svg);
+}
+
+.pers3 {
+    --x: -400; --y: 400; --l: 400; --h: 500;
+    background-image: url(assets/pers3.svg);
+}
+
+.cafe, .tarte, .soupe, .omelette, .cagnotte, .btnClient {
+    z-index: 100;
+}
+
+.cafe { 
+    --x: 1240.769; --y: 866.808; --l: 139.025; --h: 113.549;
+    background-image: url(assets/cafe.svg);    
+}
+
+.tarte {
+    --x: 912.574; --y: 894.225; --l: 269.958; --h: 98.206;
+    background-image: url(assets/tarte.svg);
+}
+
+.soupe {
+    --x: 538.217; --y: 862.213; --l: 269.958; --h: 137.789;
+    background-image: url(assets/soupe.svg);
+}
+
+.omelette {
+    --x: 191.212; --y: 881.549; --l: 269.958; --h: 127.401;
+    background-image: url(assets/omelette.svg);
+}
+
+.cagnotte {
+    --x: 1575; --y: 786; --l: 342; --h: 227;
+    background-image: url(assets/cagnotte.svg);
+    padding: 2px;;
+}
+
+.btnClient {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.tarte, .soupe, .omelette {
+    visibility: hidden;
+}
+
+.tarte.visible, .soupe.visible, .omelette.visible {
+    visibility: visible;
+}

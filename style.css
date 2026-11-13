@@ -1,7 +1,10 @@
 :root {
-    /* Remplace par la taille de ta page Inkscape (Fichier > Propriétés du document) */
     --largeur: 1920;
     --hauteur: 1080;
+}
+
+html, body, .container {
+    cursor: none !important; 
 }
 
 body {
@@ -18,8 +21,11 @@ body {
     aspect-ratio: var(--largeur) / var(--hauteur);
     width: min(100vw, 100dvh * var(--largeur) / var(--hauteur));
     overflow: hidden;
+    container-type: size;
 }
 
+
+/* POSITIONNEMENT DECOR */
 .bg,
 .stand {
     position: absolute;
@@ -29,12 +35,12 @@ body {
     pointer-events: none;
 }
 
-.bg    { background-image: url(assets/bg.svg);    z-index: 0; }
-.stand { background-image: url(assets/stand.svg); z-index: 90; }
+.bg    { background-image: url(assets/bg.png);    z-index: 0; }
+.stand { background-image: url(assets/stand.png); z-index: 90; }
 
 .arbre, .potager, .poulailler,
 .pers1, .pers2, .pers3,
-.cafe, .tarte, .soupe, .omelette, .cagnotte {
+.cafe, .tarte, .soupe, .omelette, .plats, .cagnotte {
     position: absolute;
     left:   calc(var(--x) / var(--largeur) * 100%);
     top:    calc(var(--y) / var(--hauteur) * 100%);
@@ -42,7 +48,7 @@ body {
     height: calc(var(--h) / var(--hauteur) * 100%);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .arbre, .potager, .poulailler {
@@ -50,8 +56,8 @@ body {
 }
 
 .arbre {
-    --x: -18; --y: 80; --l: 549.083; --h: 659.283;
-    background-image: url(assets/arbre-.svg);   
+    --x: 0; --y: 50; --l: 500; --h: 700;
+    background-image: url(assets/arbre-.png);   
 }
 
 .arbre.surbrillance {
@@ -59,12 +65,12 @@ body {
 }
 
 .arbre.active {
-    background-image: url(assets/arbre+.svg);
+    background-image: url(assets/arbre+.png);
 }
 
 .potager {
     --x: 600; --y: 500; --l: 500.300; --h: 270;
-    background-image: url(assets/potager-.svg);
+    background-image: url(assets/potager-.png);
 }
 
 .potager.surbrillance {
@@ -72,12 +78,12 @@ body {
 }
 
 .potager.active {
-    background-image: url(assets/potager+.svg);
+    background-image: url(assets/potager+.png);
 }
 
 .poulailler {
     --x: 1356.898; --y: 381.836; --l: 511.076; --h: 442.541;
-    background-image: url(assets/poulailler-.svg);
+    background-image: url(assets/poulailler-.png);
 }
 
 .poulailler.surbrillance {
@@ -85,7 +91,7 @@ body {
 }
 
 .poulailler.active {
-    background-image: url(assets/poulailler.svg);
+    background-image: url(assets/poulailler+.png);
 }
 
 .pers1, .pers2, .pers3 {
@@ -95,7 +101,7 @@ body {
 }
 
 .pers1 {
-    --x: -100; --y: 364.237; --l: 330; --h: 557.473;    
+    --x: -400; --y: 364.237; --l: 330; --h: 557.473;    
     background-image: url(assets/pers1.svg);    
 }
 
@@ -109,46 +115,187 @@ body {
     background-image: url(assets/pers3.svg);
 }
 
-.cafe, .tarte, .soupe, .omelette, .cagnotte, .btnClient {
+.cafe, .tarte, .soupe, .omelette, .plats, .cagnotte, .btnClient {
     z-index: 100;
 }
 
+.plats {
+    --x: 300; --y: 800; --l: 800; --h: 200;
+    background-image: url(assets/plats.png); 
+}
+
 .cafe { 
-    --x: 1240.769; --y: 866.808; --l: 139.025; --h: 113.549;
-    background-image: url(assets/cafe.svg);    
+    --x: 1240.769; --y: 800; --l: 200; --h: 200;
+    background-image: url(assets/tasse.png);    
 }
 
 .tarte {
-    --x: 912.574; --y: 894.225; --l: 269.958; --h: 98.206;
-    background-image: url(assets/tarte.svg);
+    --x: 870; --y: 800; --l: 240; --h: 160;
+    background-image: url(assets/tarte.png);
 }
 
 .soupe {
-    --x: 538.217; --y: 862.213; --l: 269.958; --h: 137.789;
-    background-image: url(assets/soupe.svg);
+    --x: 580; --y: 830; --l: 250; --h: 150;
+    background-image: url(assets/soupe.png);
 }
 
 .omelette {
-    --x: 191.212; --y: 881.549; --l: 269.958; --h: 127.401;
-    background-image: url(assets/omelette.svg);
+    --x: 310; --y: 830; --l: 220; --h: 127.401;
+    background-image: url(assets/omelettes.png);
 }
 
 .cagnotte {
-    --x: 1575; --y: 786; --l: 342; --h: 227;
+    --x: 1600; --y: 786; --l: 200; --h: 168;
     background-image: url(assets/cagnotte.svg);
-    padding: 2px;;
+    padding: 20px;
+    font-size: 20px;
 }
 
+/* BOUTON APPEL CLIENT */
 .btnClient {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 4%;
+    border: none;
+    border-radius: 12px;
+    background-color: rgb(43, 174, 226);
+    color: whitesmoke;
+    width: 10%;
+    height: 8%;
+    box-shadow: 2px 2px 5px 2px rgba(28, 29, 29, 0.5);
+    cursor: pointer;
 }
 
-.tarte, .soupe, .omelette {
+
+/* VISIBILITE PLATS */
+.tarte, .soupe, .omelette, .pers1, .pers2, .pers3 {
     visibility: hidden;
 }
 
-.tarte.visible, .soupe.visible, .omelette.visible {
+.tarte.visible, .soupe.visible, .omelette.visible, .pers1.visible, .pers2.visible, .pers3.visible {
     visibility: visible;
+}
+
+
+/* MESSAGES SURVOL */
+.messArbre, .messPotager, .messPoulailler {
+    position: absolute;
+    color: white;
+    background-color: rgb(80, 167, 40);
+    display: none;
+    z-index: 999;
+    top: 50%;
+    left: 35%;
+    padding: 10px;
+    border-radius: 12px;
+} 
+
+.arbre:hover .messArbre, 
+.potager:hover .messPotager, 
+.poulailler:hover .messPoulailler{
+    display: block;
+}
+
+.messCafe, .messTarte, .messSoupe, .messOmelette {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: coral;
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.cafe:hover .messCafe,
+.tarte:hover .messTarte, 
+.soupe:hover .messSoupe,
+.omelette:hover .messOmelette {
+    display: block;
+}
+
+/*PAGE D'ACCUEIL*/
+.presentation {
+    position: absolute;
+    inset: 0;
+    z-index: 999;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5% 8%;
+    color: blanchedalmond;
+    background-color: black;
+    text-align: center;
+    transform: translateY(0%);
+    transition: transform 2s ease;
+}
+
+.presentation h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 6cqw, 4rem);
+}
+
+.regles {
+    width: 100%;
+    max-width: 80%;
+    max-height: 45%;
+    overflow-y: auto;
+}
+
+.regles h2 {
+    margin-top: 0;
+    font-size: clamp(1.1rem, 3.5cqw, 2.2rem);
+}
+
+.regles p {
+    font-size: clamp(0.85rem, 2.2cqw, 1.3rem);
+    line-height: 1.4;
+}
+
+.noms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: clamp(0.8rem, 2cqw, 1.2rem);
+}
+
+.noms p {
+    margin: 0;
+}
+
+.btnDemarrer {
+    padding: 0.8em 2.5em;
+    font-size: clamp(1rem, 2.5cqw, 1.5rem);
+    font-weight: bold;
+    color: blanchedalmond;
+    background-color: chocolate;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btnDemarrer:hover {
+    background-color: #e07a32;
+    transform: scale(1.05);
+}
+
+
+/*  BAGETTE MAGIQUE  */
+#magic-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 40px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out; 
+}
+ 
+#magic-cursor.clicking {
+    transform: translate(-50%, -50%) rotate(-20deg) scale(0.8);
 }

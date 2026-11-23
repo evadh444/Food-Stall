@@ -10,120 +10,101 @@
 // addMoney(5);
 // addMoney(8);
 const arbre = document.querySelector('.arbre');
+const potager = document.querySelector('.potager');
+const poulailler = document.querySelector('.poulailler');
+const tasse = document.querySelector('.cafe');
+const tarte = document.querySelector('.tarte');
+const soupe = document.querySelector('.soupe');
+const omelette = document.querySelector('.omelette');
+const cagnotte = document.querySelector('.cagnotte');
 const pers1 = document.querySelector('.pers1');
+const pers2 = document.querySelector('.pers2');
+const pers3 = document.querySelector('.pers3');
+const btnClient = document.querySelector('.btnClient');
 
-arbre.addEventListener('click', () => {
-    arbre.classList.toggle('active');
-});
-
-pers1.addEventListener('click', () => {
-    pers1.style.transform = 'translateX(900px)';
-});
-
-import { genererCommande } from "./scripts/customer.js";
-import { verifierCommande } from "./scripts/commandes.js";
-
-// ALICE
-let clientPresent = false;
-let clientActuel;
-
-const clients = document.querySelectorAll('.pers1');
+const clients = [pers1, pers2, pers3];
 let indexClient = 0;
+let clientActuel = null;
 
-// Eva
-// Générer la commande
-let order = null;
+let diamants = 0;
+let clientPresent = false;
+let arbreAmeliore = false;
+let potagerAmeliore = false;
+let poulaillerAmeliore = false;
+let diamantsCafe = 3;
+let diamantstarte = 6;
+let diamantsSoupe = 9;
+let diamantsOmelette = 12;
 
-// Récupérer l'emplacement de la commande dans l'index.html
-// let order = null;
-const orderDisplay = document.getElementById("order-display"); 
-
-// Afficher la commande
-// orderDisplay.textContent = order.food;
-
-// Récupération des boutons aliments
-const tarteAuxPommesButton = document.getElementById("tarteAuxPommes");
-const cafeButton = document.getElementById("cafe");
-
-// Clic sur la tarte aux pommes
-tarteAuxPommesButton.addEventListener("click", function() {
-    
-    const resultat = verifierCommande(order, "Tarte aux pommes");
-
-    console.log("Résultat :", resultat);
-
-    departClient();
-});
-
-// Clic sur café 
-cafeButton.addEventListener("click", function() {
-
-    const resultat = verifierCommande(order, "Café");
-
-    console.log("Résultat :", resultat);
-
-    departClient();
-});
-
-console.log("Commande générée :", order);
-
-function departClient() {
-    if(!clientPresent) return;
-    const clientQuiPart = clientActuel;
-
-    orderDisplay.style.display = "none";
-
-    clientQuiPart.style.transform = 'translateX(400%)';
-
-    clientQuiPart.addEventListener('transitionend', function retour() {
-        clientQuiPart.classList.remove('visible');
-
-        clientPresent = false;
-        clientActuel = null;   
-    }, { once : true });
-
-
-    if (order.served) {
-        console.log("Le client s'en va");
-        orderDisplay.textContent = "Le client part";
-        
-        tarteAuxPommesButton.disabled = true;
-        cafeButton.disabled = true;
-    }
-};
-
-// ALICE 
 function appelerClient() {
-    if (clientPresent) return;
-
+    if(clientPresent) return;
     clientPresent = true;
     clientActuel = clients[indexClient];
-
-    clientActuel.classList.add('visible');
-    clientActuel.style.transform = 'translateX(0)';
-
-    requestAnimationFrame(() => {
-        clientActuel.style.transform = 'translateX(140%)';
-    });
-
+    clientActuel.style.transform = 'translateX(300%)';
     indexClient = (indexClient + 1) % clients.length;
-};
+}
 
+function servir() {
+    if(!clientPresent) return;
+    clientPresent = false;   
+    clientActuel.style.transform = 'translateX(0%)';
+}
 
-const boutonAppel = document.getElementById("appel-client");
-boutonAppel.addEventListener("click", () => {
-    appelerClient();
+function afficher() {
+    cagnotte.textContent = diamants;
+
+    arbre.classList.toggle('surbrillance', diamants >= diamantsCafe && !arbreAmeliore);
+    potager.classList.toggle('surbrillance', diamants >= diamantstarte && !potagerAmeliore);
+    poulailler.classList.toggle('surbrillance', diamants >= diamantsSoupe && !poulaillerAmeliore);
+}
+
+btnClient.addEventListener('click', appelerClient);
+
+arbre.addEventListener('click', () => {
+    arbre.classList.remove('surbrillance');
+    arbre.classList.add('active');
+    diamants = diamants - diamantsCafe;
+    tarte.classList.add('visible');
+    arbreAmeliore = true;
+    afficher();
+})
+
+potager.addEventListener('click', () => {
+    potager.classList.remove('surbrillance');
+    potager.classList.add('active');
+    diamants = diamants - diamantstarte;
+    soupe.classList.add('visible');
+    potagerAmeliore = true;
+    afficher();
+})
+
+poulailler.addEventListener('click', () => {
+    poulailler.classList.remove('surbrillance');
+    poulailler.classList.add('active');
+    diamants = diamants - diamantsSoupe;
+    omelette.classList.add('visible');
+    poulaillerAmeliore = true;
+    afficher();
+})
+
+tasse.addEventListener('click', () => {
+    if(!clientPresent) return;
+    diamants += 1;
+    servir();
+    afficher();
 });
 
-// EVA
-document.querySelectorAll('.pers1').forEach(client => {
-    client.addEventListener('transitionend', () => {
-        if (client === clientActuel && clientPresent) {
-            console.log("Le client est arrivé devant le stand");
+tarte.addEventListener('click', () => {
+    if(!clientPresent) return;
+    diamants += 3;
+    servir();
+    afficher();
+})
 
-            order = genererCommande();
-            orderDisplay.textContent = order.food;
-            orderDisplay.style.display = "block";
-        }
-    });
-});
+soupe.addEventListener('click', () => {
+    if(!clientPresent) return;
+    diamants += 5;
+    servir();
+    afficher();
+})
+

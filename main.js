@@ -1,3 +1,14 @@
+// console.log("Bienvenue au Food Stall community");
+
+// let money = 0;
+
+// function addMoney(amount) {
+//     money = money + amount;
+//     console.log("Diamants disponibles:", money);
+// }
+
+// addMoney(5);
+// addMoney(8);
 const arbre = document.querySelector('.arbre');
 const potager = document.querySelector('.potager');
 const poulailler = document.querySelector('.poulailler');
